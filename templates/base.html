@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	{% block link %}
+	{% endblock %}
+	<meta charset="utf-8">
+	<link rel='stylesheet' href="{% static 'css/base.css' %}">
+	<title>Account</title>
+</head>
+<body>
+	{% block main %}
+	{% endblock %}
+	<div class="nav-item">
+		<div class="items">
+			<a href="{% url 'index' %}">Sales</a>
+		</div>
+		<div class="items">
+			<a href="{% url 'record' %}">Baki</a>
+		</div>
+		<div class="items">
+			<a href="{% url 'item' %}">Item</a>
+		</div>
+		<div class="items">
+			<a href="#">Ledger</a>
+		</div>
+	</div>
+</body>
+<script>
+	url = window.location.href
+	for(i in document.links){
+		if(url == document.links[i].href)
+			document.links[i].style.color= '#04a96d';
+	}
+</script>
+{% block js %}
+{% endblock %}
+</html>

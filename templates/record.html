@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="display">
+	<button id="1" onclick="display(1);">Deliver Not yet</button>
+	<button id="2" onclick="display(2);">Baki</button>
+	<button id="3" onclick="display(3);">History</button>
+</div>
+<div class="deliver">
+	{% for item in delivers %}
+	<div class="item">
+		<p>{{item.who}}</p>
+		<p class="num">Time: {{item.date}}</p>
+		<p class="num">Product:{{item.product.name}}</p>
+		<form method="POST">
+			{% csrf_token %}
+			<button type="submit" name="paid" value="{{item.pk}}">Delivered</button>
+		</form>
+	</div>
+	{% endfor %}
+</div>
+<div class="baki" style="display: none;">
+	{% for item in debts %}
+	<div class="item">
+		<p>{{item.who}}</p>
+		<p class="num">Time: {{item.date}}</p>
+		<p class="num">Product:{{item.product.name}}</p>
+		<form method="POST">
+			{% csrf_token %}
+			<button type="submit" name="deliver" value="{{item.pk}}">Paid</button>
+		</form>
+	</div>
+	{% endfor %}
+</div>
+
+<div class="history" style="display: none;">
+	{% for item in history %}
+	<div class="item">
+		<p>{{item.who}}</p>
+		<p class="num">Time: {{item.date}}</p>
+		<p class="num">Product:{{item.product.name}}</p>
+	</div>
+	{% endfor %}
+</div>
+
+{% endblock %}
+
+
+{% block js %}
+<script type="text/javascript">
+	document.getElementById("1").style.color = "pink";
+	function display(id){
+		if(id == 1){
+			document.getElementById("1").style.color = "pink";
+			document.getElementById("2").style.color = "black";
+			document.getElementById("3").style.color = "black";
+			document.getElementsByClassName('deliver')[0].style.display = 'block';
+			document.getElementsByClassName('baki')[0].style.display = 'none';
+			document.getElementsByClassName('history')[0].style.display = 'none';
+		}
+		if(id == 2){
+			document.getElementById("2").style.color = "pink";
+			document.getElementById("1").style.color = "black";
+			document.getElementById("3").style.color = "black";
+			document.getElementsByClassName('deliver')[0].style.display = 'none';
+			document.getElementsByClassName('baki')[0].style.display = 'block';
+			document.getElementsByClassName('history')[0].style.display = 'none';
+		}
+		if(id == 3){
+			document.getElementById("3").style.color = "pink";
+			document.getElementById("2").style.color = "black";
+			document.getElementById("1").style.color = "black";
+			document.getElementsByClassName('deliver')[0].style.display = 'none';
+			document.getElementsByClassName('baki')[0].style.display = 'none';
+			document.getElementsByClassName('history')[0].style.display = 'block';
+		}
+	}
+</script>
+{% endblock %}

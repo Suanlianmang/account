@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<form method="POST">
+	{% csrf_token %}
+	{{form.name}}
+	{{form.cost}}
+	{{form.price}}
+	<button type="submit" name="item" value="item">Submit</button>
+</form>
+
+{% for item in items %}
+	<div class="item">
+		<p>{{item.name}}</p>
+		<p class="num">Cost: {{item.cost}}</p>
+		<p class="num">Price: {{item.price}}</p>
+		<form method="POST">
+			{% csrf_token %}
+			<button type="submit" name="delete" value="{{item.pk}}" style="background-color: #dc4c46;">Delete</button>
+		</form>
+	</div>
+{% endfor %}
+
+{% endblock %}
+
+
+{% block js %}
+<script type="text/javascript">
+	document.getElementById('id_name').placeholder = "Product Name";
+	document.getElementById('id_cost').placeholder = "Cost";
+	document.getElementById('id_price').placeholder = "Price";
+
+</script>
+{% endblock %}

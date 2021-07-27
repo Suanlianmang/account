@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block main %}
+{% for item in items %}
+	<div class="item">
+		<p>{{item.name}}</p>
+		<p class="num">Price: {{item.price}}</p>
+		<button onclick="sell('{{item.pk}}');">Sell</button>
+	</div>
+{% endfor %}
+<form method="POST" class="sell_form">
+	{% csrf_token %}
+	<label>Customer</label>
+	{{form.who}}
+	<div>Paid: {{form.paid}}</div>
+	<div style="display: none;">Paid: {{form.product}}</div>
+	<div>
+		<button type="submit" name="item" value="item">Ok</button>
+		<button type="button" onclick="document.getElementsByClassName('sell_form')[0].style.display = 'none';" style="background-color:#dc4c46;">Cancel</button>
+	</div>
+</form>
+{% endblock %}
+
+{% block js %}
+	<script type="text/javascript">
+		function sell(id){
+			document.getElementById('id_product').value = id;
+			document.getElementsByClassName('sell_form')[0].style.display = 'flex';
+		}
+
+	</script>
+{% endblock %}
