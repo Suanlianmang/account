@@ -36,7 +36,8 @@ def item(request):
 			p.delete()
 	context = {
 	'form': ProductForm(),
-	'items': Product.objects.all()
+	'items': Product.objects.all(),
+	'check': len(Product.objects.all())
 	}
 	return render(request, 'item.html', context)
 
