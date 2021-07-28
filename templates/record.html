@@ -14,7 +14,7 @@
 		<p class="num">Product:{{item.product.name}}</p>
 		<form method="POST">
 			{% csrf_token %}
-			<button type="submit" name="paid" value="{{item.pk}}">Delivered</button>
+			<button type="submit" name="deliver" value="{{item.pk}}">Delivered</button>
 		</form>
 	</div>
 	{% endfor %}
@@ -27,7 +27,7 @@
 		<p class="num">Product:{{item.product.name}}</p>
 		<form method="POST">
 			{% csrf_token %}
-			<button type="submit" name="deliver" value="{{item.pk}}">Paid</button>
+			<button type="submit" name="paid" value="{{item.pk}}">Paid</button>
 		</form>
 	</div>
 	{% endfor %}
