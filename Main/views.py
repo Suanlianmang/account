@@ -42,6 +42,16 @@ def item(request):
 	return render(request, 'item.html', context)
 
 def record(request):
+	if request.method == "POST":
+		form = request.POST
+		if request.POST.get('paid', '') != '':
+			p = Transaction.objects.get(pk=int(form.get('paid', '')))
+			p.paid = True
+			p.save()
+		if request.POST.get('deliver', '') != '':
+			p = Transaction.objects.get(pk=int(form.get('deliver', '')))
+			p.recieved = True
+			p.save()
 	context = {
 	'debts': Transaction.objects.filter(paid=False),
 	'delivers': Transaction.objects.filter(recieved=False),
