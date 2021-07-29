@@ -5,6 +5,8 @@ class Product(models.Model):
 	name = models.CharField(max_length=100)
 	cost = models.IntegerField()
 	price = models.IntegerField()
+	def profit(self):
+		return self.price - self.cost
 
 class Transaction(models.Model):
 	product = models.ForeignKey(Product, on_delete=models.CASCADE)
