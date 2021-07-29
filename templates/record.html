@@ -12,6 +12,7 @@
 		<p>{{item.who}}</p>
 		<p class="num">Time: {{item.date}}</p>
 		<p class="num">Product:{{item.product.name}}</p>
+		<p class="num">Price:{{item.product.price}}</p>
 		<form method="POST">
 			{% csrf_token %}
 			<button type="submit" name="deliver" value="{{item.pk}}">Delivered</button>
@@ -25,6 +26,7 @@
 		<p>{{item.who}}</p>
 		<p class="num">Time: {{item.date}}</p>
 		<p class="num">Product:{{item.product.name}}</p>
+		<p class="num">Price:{{item.product.price}}</p>
 		<form method="POST">
 			{% csrf_token %}
 			<button type="submit" name="paid" value="{{item.pk}}">Paid</button>
@@ -39,6 +41,7 @@
 		<p>{{item.who}}</p>
 		<p class="num">Time: {{item.date}}</p>
 		<p class="num">Product:{{item.product.name}}</p>
+		<p class="num">Profit:{{item.product.profit}}</p>
 	</div>
 	{% endfor %}
 </div>
